@@ -21,6 +21,10 @@ public class Article {
         this.id = id;
     }
 
+    public Article() {
+
+    }
+
     @Override
     public String toString() {
         return "Article{" +
