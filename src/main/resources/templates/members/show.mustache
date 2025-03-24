@@ -2,20 +2,19 @@
 <table class="table">
     <thead>
     <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Title</th>
-        <th scope="col">Content</th>
+        <th scope="col">Email</th>
+        <th scope="col">Password</th>
     </tr>
     </thead>
     <tbody>
     {{#member}} <!-- 모델 변수명과 같아야함 -->
     <tr>
-        <th scope="row">{{id}}</th>
-        <td colspan="2">{{title}}</td>
-        <td>{{content}}</td>
+        <th scope="row">{{email}}</th>
+        <td colspan="2">{{password}}</td>
     </tr>
     {{/member}}
     </tbody>
+    <a href="/members">Go to member list</a>
 
 </table>
 {{>layouts/footer}}

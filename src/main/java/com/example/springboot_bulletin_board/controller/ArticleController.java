@@ -35,7 +35,7 @@ public class ArticleController {
         Article saved = articleRepository.save(article);
         log.info(saved.toString());
 //        System.out.println(saved.toString()); //article -> DB 저장 확인
-        return "";
+        return "redirect:/articles/"+ saved.getId();
     }
     @GetMapping("/articles/{id}") //URL에 직접 id 입력하여 요청
     public String show(@PathVariable Long id, Model model){

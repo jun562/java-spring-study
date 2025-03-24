@@ -1,5 +1,7 @@
 {{>layouts/header}}
 <table class="table">
+
+    <a href="/articles/new">New Article</a> <!-- href = "url" -->
     <thead>
     <tr>
         <th scope="col">ID</th>
@@ -11,7 +13,7 @@
     {{#articleList}} <!--데이터 묶음인 경우 내부 코드 반복 -->
     <tr>
         <th scope="row">{{id}}</th>
-        <td colspan="2">{{title}}</td>
+        <td><a href="/articles/{{id}}">{{title}}</td>
         <td>{{content}}</td>
     </tr>
     {{/articleList}}

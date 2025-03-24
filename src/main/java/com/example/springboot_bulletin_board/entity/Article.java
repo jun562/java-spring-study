@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
@@ -12,6 +13,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor //JPA가 리플렉션으로 객체 생성하므로 필요
 @ToString
+@Getter
 public class Article {
     @Id
     @GeneratedValue
