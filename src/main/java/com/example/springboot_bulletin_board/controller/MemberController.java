@@ -1,6 +1,7 @@
 package com.example.springboot_bulletin_board.controller;
 
 import com.example.springboot_bulletin_board.dto.MemberForm;
+import com.example.springboot_bulletin_board.entity.Article;
 import com.example.springboot_bulletin_board.entity.Member;
 import com.example.springboot_bulletin_board.repository.MemberRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -10,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Slf4j
 @Controller
@@ -58,5 +60,14 @@ public class MemberController {
         }
         return "redirect:/members/"+memberEntity.getId();
 
+    }
+    @GetMapping("/members/{id}/delete")
+    public String delete(@PathVariable Long id, RedirectAttributes rttr){
+        Member target = memberRepository.findById(id).orElse(null);
+        if(target != null){
+            memberRepository.delete(target);
+            rttr.addFlashAttribute("msg", "삭제됐습니다!");
+        }
+        return "redirect:/members";
     }
 }
