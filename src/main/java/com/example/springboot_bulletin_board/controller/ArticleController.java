@@ -56,4 +56,26 @@ public class ArticleController {
 //        3. 뷰 페이지 설정하기
         return "articles/index";
     }
+    @GetMapping("/articles/{id}/edit") //뷰페이지 변수 중괄호 2개, 컨트롤러 url 변수 중괄호 1개
+    public String edit(@PathVariable Long id, Model model){
+        Article articleEntity = articleRepository.findById(id).orElse(null);
+        model.addAttribute("article", articleEntity);
+        return "articles/edit";
+    }
+
+    @PostMapping("/articles/update")
+    public String update(ArticleForm form){ //매개변수로 DTO 받아옴
+        log.info(form.toString());
+//        1. DTO를 엔티티로 변환하기
+        Article articleEntity = form.toEntity();
+//        2. 엔티티를 DB에 저장하기
+//        2-1. DB에서 기존 데이터 가져오기
+        Article target = articleRepository.findById(articleEntity.getId()).orElse(null);
+//        2-2. 기존 데이터 값을 갱신하기
+        if(target != null){
+            articleRepository.save(articleEntity);
+        }
+//        3. 수정 결과 페이지로 리다이렉트하기
+        return "redirect:/articles/"+ articleEntity.getId();
+    }
 }

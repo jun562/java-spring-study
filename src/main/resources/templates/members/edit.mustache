@@ -1,0 +1,17 @@
+{{>layouts/header}}
+{{#member}}
+<form class="container" action="/join" method="post">
+    <input name="id" type="hidden" value="{{id}}">
+    <div class="mb-3">
+        <label class="form-label">이메일</label>
+        <input value ={{email}} type="email" class="form-control" name="email">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">비밀번호</label>
+        <input value ={{password}} type="password" class="form-control" name="password">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <a href="/members/{{id}}">Back</a>
+</form>
+{{/member}}
+{{>layouts/footer}}
