@@ -1,7 +1,10 @@
 package com.example.springboot_bulletin_board.controller;
 import com.example.springboot_bulletin_board.dto.ArticleForm;
+import com.example.springboot_bulletin_board.dto.CommentDto;
 import com.example.springboot_bulletin_board.entity.Article;
 import com.example.springboot_bulletin_board.repository.ArticleRepository;
+import com.example.springboot_bulletin_board.repository.CommentRepository;
+import com.example.springboot_bulletin_board.service.CommentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +22,8 @@ import java.util.Optional;
 public class ArticleController {
     @Autowired // 스프링 부트가 미리 생성해 놓은 리파지터리 객체 주입
     private ArticleRepository articleRepository;
+    @Autowired
+    private CommentService commentService;
     @GetMapping("/articles/new") //HTTP 메소드
     public String newArticleForm(){
         return "articles/new";
@@ -43,8 +48,10 @@ public class ArticleController {
         log.info("id " + id);
 //        1. id를 조회해 DB에서 해당 데이터 가져오기
         Article articleEntity = articleRepository.findById(id).orElse(null); //Optional은 NPE을 피하기 위해 사용
+        List<CommentDto> commentDtos = commentService.comments(id);
 //        2. 가져온 데이터를 모델에 등록하기
         model.addAttribute("article", articleEntity);
+        model.addAttribute("commentDtos", commentDtos);
 //        3. 뷰 페이지 반환하기
         return "articles/show"; //항상 상대 경로는 templates의 하위 디렉토리
     }
