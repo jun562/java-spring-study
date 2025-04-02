@@ -73,8 +73,8 @@ public class ArticleService {
         articleList.stream()
                 .forEach(article -> articleRepository.save(article));
 //        3. 강제 예외 발생시키기
-        articleRepository.findById(-1L)
-                .orElseThrow(() -> new IllegalArgumentException("결제 실패!"));
+//        articleRepository.findById(-1L)
+//                .orElseThrow(() -> new IllegalArgumentException("결제 실패!"));
 //        4. 결과 값 반환하기
         return articleList;
     }
